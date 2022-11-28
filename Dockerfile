@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     ${EXTRA_PKGS} && \
     apt autoremove -y
 
-ARG USER
+ARG USER='dev' 
 RUN test -n "$USER"
 
 # Create your user

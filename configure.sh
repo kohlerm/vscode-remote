@@ -61,8 +61,8 @@ HOME_SSH_AUTHORIZED_KEYS = '''
 $AUTHORIZED_KEYS
 '''
 ">import.toml
-
-fly init $appname --import import.toml --org $orgname --overwrite
+cp import.toml fly.toml
+fly launch
 
 rm import.toml
 
@@ -73,7 +73,7 @@ print }'`
 fly volumes create data --region $REGION $disksize
 
 fly deploy --build-arg USER=$(whoami) --build-arg EXTRA_PKGS="$extrapackages" $usedocker 
-
+fly ips allocate-v4 -a $appname
 echo
 echo
 echo "To use in VS Code, tell the remote-ssh package to connect to $(whoami)@$(fly info --host):10022"
